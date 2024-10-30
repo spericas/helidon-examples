@@ -89,11 +89,15 @@ class RandomServiceTest {
         GrpcClient grpcClient = webClient.client(GrpcClient.PROTOCOL);
         RandomServiceGrpc.RandomServiceStub service = RandomServiceGrpc.newStub(grpcClient.channel());
         CompletableFuture<Iterator<RandomMessage>> future = new CompletableFuture<>();
+
+        // provide input params
         StreamObserver<ParamMessage> req = service.randomMany(multiStreamObserver(future));
         req.onNext(newParamMessage(BOUND));
         req.onNext(newParamMessage(COUNT));
         req.onCompleted();
         Iterator<RandomMessage> res = future.get(TIMEOUT_SECONDS, TimeUnit.SECONDS);
+
+        // verify count and bound on random numbers returned
         int n = 0;
         for (; res.hasNext(); n++) {
             assertThat(res.next().getNumber(), is(lessThan(BOUND)));
