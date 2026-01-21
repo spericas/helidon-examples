@@ -39,12 +39,15 @@
 
     <properties>
         <mainClass>io.helidon.examples.webserver.grpc.GrpcMain</mainClass>
+        <version.lib.google-protobuf>4.33.4</version.lib.google-protobuf>
+        <version.lib.grpc>1.78.0</version.lib.grpc>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-api</artifactId>
+            <version>${version.lib.grpc}</version>
         </dependency>
         <dependency>
             <groupId>io.helidon.config</groupId>
@@ -73,6 +76,7 @@
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
+            <version>${version.lib.google-protobuf}</version>
         </dependency>
         <dependency>
             <groupId>io.helidon.webclient</groupId>

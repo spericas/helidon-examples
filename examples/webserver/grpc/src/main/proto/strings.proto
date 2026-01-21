@@ -14,9 +14,15 @@
  * limitations under the License.
  */
 
-
-syntax = "proto3";
+edition = "2024";
 option java_package = "io.helidon.examples.webserver.grpc";
+
+import option "google/protobuf/java_features.proto";
+
+option java_outer_classname = "Strings";
+
+option features.enforce_naming_style = STYLE_LEGACY;
+option features.default_symbol_visibility = EXPORT_ALL;
 
 service StringService {
   rpc Upper (StringMessage) returns (StringMessage) {}
@@ -27,5 +33,6 @@ service StringService {
 }
 
 message StringMessage {
+  option features.(pb.java).nest_in_file_class = YES;
   string text = 1;
 }
